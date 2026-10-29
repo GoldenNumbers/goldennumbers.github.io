@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple starter website you can customize.">
+  <title>My Website</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home">My Website</a>
+      <nav aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <p class="eyebrow">Your site starts here</p>
+        <h1>Welcome to my website.</h1>
+        <p class="hero-copy">A clean starter page you can make your own. Change the text, colors, and sections whenever you're ready.</p>
+        <button id="helloButton" type="button">Test the button</button>
+        <p id="buttonMessage" class="button-message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container narrow">
+        <p class="eyebrow">About</p>
+        <h2>A little about this site</h2>
+        <p>This is a basic website starter made with HTML, CSS, JavaScript, and Python's built-in web server. It does not require installing extra Python packages.</p>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="contact">
+      <div class="container narrow">
+        <p class="eyebrow">Contact</p>
+        <h2>Get in touch</h2>
+        <p>Replace this example text with your real contact information when you're ready to publish.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> My Website</p>
+    </div>
+  </footer>
+</body>
+</html>
