@@ -1,84 +1,176 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#8de8f2">
-  <meta name="description" content="GoldenInternet — a bright place to discover browser games and videos.">
-  <title>GoldenInternet — Play & Watch</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aero Hub</title>
+<style>
+:root{color-scheme:light dark;--sky1:#7fd4ff;--sky2:#e6f8ff;--glass:rgba(255,255,255,.55);--glass-b:rgba(255,255,255,.9);--ink:#0b3a5b;--accent:#1da1e8;--green:#5cc84a;--btn1:#7de3ff;--btn2:#1698e0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky1:#0a5c8f;--sky2:#0b2d4a;--glass:rgba(20,60,95,.55);--glass-b:rgba(160,225,255,.5);--ink:#e6f6ff}}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:"Segoe UI","Trebuchet MS",Helvetica,Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 70%);background-attachment:fixed;overflow-x:hidden}
+.hill{position:fixed;left:-10%;right:-10%;bottom:-120px;height:260px;background:radial-gradient(ellipse at 50% 0,#8fe36b,var(--green) 55%,#2f9a3a);border-radius:50% 50% 0 0;z-index:-1;box-shadow:0 -10px 40px rgba(255,255,255,.5)}
+.bub{position:fixed;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.95),rgba(255,255,255,.2) 45%,rgba(120,210,255,.25));border:1px solid rgba(255,255,255,.8);z-index:-1;animation:rise linear infinite}
+@keyframes rise{from{transform:translateY(0)}to{transform:translateY(-120vh)}}
+header{text-align:center;padding:22px 12px 6px}
+h1{margin:0;font-size:clamp(2rem,6vw,3.4rem);font-weight:300;letter-spacing:1px;text-shadow:0 2px 0 rgba(255,255,255,.8),0 4px 14px rgba(30,150,230,.5)}
+h1 b{font-weight:700;color:var(--accent)}
+nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.btn{cursor:pointer;border:1px solid rgba(255,255,255,.9);color:#fff;font:600 1rem inherit;font-family:inherit;padding:10px 22px;border-radius:999px;background:linear-gradient(180deg,var(--btn1),var(--btn2) 55%,#0e7cc4);box-shadow:0 4px 12px rgba(10,120,200,.45),inset 0 2px 3px rgba(255,255,255,.9);text-shadow:0 1px 2px rgba(0,60,110,.6);position:relative;overflow:hidden}
+.btn::before{content:"";position:absolute;left:6%;right:6%;top:2px;height:45%;border-radius:999px;background:linear-gradient(rgba(255,255,255,.7),rgba(255,255,255,.05))}
+.btn:hover{filter:brightness(1.1)}.btn:active{transform:translateY(1px)}
+.btn.on{background:linear-gradient(180deg,#b6f58f,#3dbb3a 55%,#2a9a2c)}
+.panel{max-width:860px;margin:0 auto 90px;background:var(--glass);border:2px solid var(--glass-b);border-radius:26px;padding:20px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 40px rgba(20,120,200,.35),inset 0 2px 8px rgba(255,255,255,.8)}
+.wrap{padding:0 12px}
+section{display:none}section.show{display:block}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+canvas{max-width:100%;border-radius:16px;border:3px solid #fff;box-shadow:0 6px 20px rgba(20,120,200,.4);background:#073b5e;display:block;margin:0 auto}
+.stage{text-align:center}
+.score{font-weight:700;margin:8px 0}
+.grid{display:grid;gap:10px;margin:0 auto}
+.card,.cell{aspect-ratio:1;border-radius:16px;border:2px solid #fff;cursor:pointer;font-size:2rem;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#bff0ff,#4db8f0);box-shadow:inset 0 3px 6px rgba(255,255,255,.9),0 4px 10px rgba(20,120,200,.3);color:var(--ink)}
+.card.flip,.card.done{background:linear-gradient(180deg,#fff,#d9f7ff)}
+.card.done{opacity:.6}
+.cell{font-size:2.6rem;font-weight:700}
+input[type=range]{accent-color:var(--accent);width:160px}
+audio,video{width:100%;border-radius:16px;margin-top:10px}
+video{background:#062f4a;max-height:420px}
+label.btn{display:inline-block}
+input[type=file]{display:none}
+.hint{text-align:center;opacity:.8;font-size:.9rem;margin-top:10px}
+h2{margin:0 0 12px;font-weight:400;text-align:center}
+</style></head>
 <body>
-  <div class="sky-glow"></div><div class="bubble bubble-a"></div><div class="bubble bubble-b"></div><div class="bubble bubble-c"></div>
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="GoldenInternet home"><span class="brand-orb">G</span><span>Golden<span class="brand-light">Internet</span><small>A brighter side of the internet</small></span></a>
-    <nav aria-label="Main navigation">
-      <a href="#home" class="nav-link active">Home</a>
-      <a href="#games" class="nav-link">Games</a>
-      <a href="#videos" class="nav-link">YouTube videos</a>
-    </nav>
-    <button id="themeToggle" class="glass-button theme-button" type="button" aria-label="Toggle light and night theme">☾</button>
-  </header>
+<div class="hill"></div>
+<header><h1>Aero <b>Hub</b></h1></header>
+<nav>
+<button class="btn on" data-t="games">🎮 Games</button>
+<button class="btn" data-t="music">🎵 Music</button>
+<button class="btn" data-t="video">🎬 Videos</button>
+</nav>
+<div class="wrap"><div class="panel">
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-copy glass-panel">
-        <p class="eyebrow">WELCOME TO A BRIGHTER WEB</p>
-        <h1>Explore. <span>Play.</span> Watch.</h1>
-        <p class="hero-text">Your colorful corner of the internet for browser games and videos — all in one place.</p>
-        <div class="hero-actions"><a class="primary-button" href="#games">Explore games <span>→</span></a><a class="secondary-button" href="#videos">Watch videos</a></div>
-        <div class="hero-note"><span class="status-dot"></span> Made for the modern web</div>
-      </div>
-      <div class="earth-scene" aria-hidden="true"><div class="sun"></div><div class="orbit orbit-one"></div><div class="earth"><div class="continent continent-one"></div><div class="continent continent-two"></div><div class="continent continent-three"></div><div class="earth-shine"></div></div><div class="leaf leaf-one"></div><div class="leaf leaf-two"></div></div>
-    </section>
+<section id="games" class="show">
+<div class="row">
+<button class="btn" data-g="snake">Snake</button>
+<button class="btn" data-g="memory">Memory</button>
+<button class="btn" data-g="ttt">Tic-Tac-Toe</button>
+</div>
+<div id="gstage" class="stage"></div>
+</section>
 
-    <section class="quick-search glass-panel">
-      <div><p class="eyebrow">FIND YOUR NEXT FAVORITE</p><h2>What are you in the mood for?</h2></div>
-      <label class="search-box"><span aria-hidden="true">⌕</span><input id="globalSearch" type="search" placeholder="Search games or your saved videos..." autocomplete="off"><kbd>/</kbd></label>
-    </section>
+<section id="music">
+<h2>Built-in tracks</h2>
+<div class="row" id="tracks"></div>
+<div class="row"><button class="btn" id="stopM">■ Stop</button>
+<span>🔊 <input type="range" id="vol" min="0" max="100" value="60"></span></div>
+<canvas id="viz" width="760" height="180"></canvas>
+<h2 style="margin-top:20px">Your own music</h2>
+<div class="row"><label class="btn">📁 Add audio files<input type="file" id="af" accept="audio/*" multiple></label></div>
+<audio id="aud" controls></audio>
+<div class="hint" id="plist"></div>
+</section>
 
-    <section class="content-section" id="games">
-      <div class="section-heading"><div><p class="eyebrow">THE PLAYGROUND</p><h2>Games <span class="heading-spark">✦</span></h2><p>Pick a game and play it right here in GoldenInternet.</p></div><span class="count-pill" id="gameCount">6 games</span></div>
-      <div class="filter-row" id="gameFilters" aria-label="Filter games">
-        <button class="filter-chip selected" data-filter="all">All games</button>
-        <button class="filter-chip" data-filter="Racing">Racing</button>
-        <button class="filter-chip" data-filter="Arcade">Arcade</button>
-        <button class="filter-chip" data-filter="Simulation">Simulation</button>
-        <button class="filter-chip" data-filter="Sports">Sports</button><button class="filter-chip" data-filter="Classroom">Classroom library</button>
-      </div>
-      <div class="game-grid" id="gameGrid">
-        <article class="game-card" data-title="Drive Mad" data-category="Racing" data-src="https://ubghyper.github.io/games/Drive-Mad.html"><div class="game-art art-drive"><span>🚙</span><i>RACING</i></div><div class="game-info"><div><h3>Drive Mad</h3><p>Balance your ride across wild tracks.</p></div><button class="play-button" aria-label="Play Drive Mad">▶</button></div></article>
-        <article class="game-card" data-title="Slope" data-category="Arcade" data-src="https://ubghyper.github.io/games/Slope.html"><div class="game-art art-slope"><span>🔴</span><i>ARCADE</i></div><div class="game-info"><div><h3>Slope</h3><p>Steer a ball through a neon course.</p></div><button class="play-button" aria-label="Play Slope">▶</button></div></article>
-        <article class="game-card" data-title="Cuphead" data-category="Arcade" data-src="https://ubghyper.github.io/games/Cuphead.html"><div class="game-art art-cup"><span>🎮</span><i>ARCADE</i></div><div class="game-info"><div><h3>Cuphead</h3><p>A challenging cartoon-style adventure.</p></div><button class="play-button" aria-label="Play Cuphead">▶</button></div></article>
-        <article class="game-card" data-title="BitLife" data-category="Simulation" data-src="https://ubghyper.github.io/games/Bitlife.html"><div class="game-art art-life"><span>🌴</span><i>SIMULATION</i></div><div class="game-info"><div><h3>BitLife</h3><p>Make choices in a text-based life sim.</p></div><button class="play-button" aria-label="Play BitLife">▶</button></div></article>
-        <article class="game-card" data-title="Basket Random" data-category="Sports" data-src="https://ubghyper.github.io/games/Basket-Random.html"><div class="game-art art-basket"><span>🏀</span><i>SPORTS</i></div><div class="game-info"><div><h3>Basket Random</h3><p>Chaotic basketball for one or two players.</p></div><button class="play-button" aria-label="Play Basket Random">▶</button></div></article>
-        <article class="game-card" data-title="Classroom Resources Library" data-category="Classroom" data-src="https://sites.google.com/view/drive-u-7-home/home"><div class="game-art art-drive"><span>🌐</span><i>GAME LIBRARY</i></div><div class="game-info"><div><h3>Classroom Resources</h3><p>Open the Google Sites game collection inside this player.</p></div><button class="play-button" aria-label="Open Classroom Resources library">▶</button></div></article>
-      </div>
-      <div class="source-note">Individual UBGHyper game pages and the Google Sites Classroom Resources catalog are loaded inside the in-page player, not as top-level redirects. The Google Sites card embeds its catalog page as a whole because its public page does not expose verified individual game URLs. Games remain the property of their creators. Some hosts may prohibit iframe embedding; GoldenInternet cannot override that restriction. <a href="https://ubghyper.github.io/" target="_blank" rel="noopener noreferrer">UBGHyper catalog</a>.</div>
-    </section>
+<section id="video">
+<div class="row">
+<label class="btn">📁 Add video files<input type="file" id="vf" accept="video/*" multiple></label>
+<button class="btn" id="bubbleBtn">✨ Bubble screen</button>
+</div>
+<canvas id="bubbles" width="760" height="380" style="display:none"></canvas>
+<video id="vid" controls playsinline></video>
+<div class="hint" id="vlist">Pick video files from your Chromebook. They play right here and are never uploaded.</div>
+</section>
 
-    <section class="content-section video-section" id="videos">
-      <div class="section-heading"><div><p class="eyebrow">YOUR VIDEO CORNER</p><h2>YouTube <span class="heading-spark">✦</span></h2><p>A custom video shelf with playback inside this page.</p></div><span class="count-pill" id="videoCount">0 videos</span></div>
-      <div class="video-add glass-panel">
-        <div><h3>Add a video to your shelf</h3><p>Paste a YouTube video link or video ID. It will play here, without navigating away.</p></div>
-        <form id="videoForm"><input id="videoInput" type="text" placeholder="Paste a YouTube URL or video ID" aria-label="YouTube URL or video ID" required><select id="videoCategory" aria-label="Video category"><option>Music</option><option>Gaming</option><option>Learning</option><option>Entertainment</option><option>Other</option></select><button class="primary-button" type="submit">Add video +</button></form>
-      </div>
-      <div class="filter-row" id="videoFilters"><button class="filter-chip selected" data-filter="all">All videos</button><button class="filter-chip" data-filter="Music">Music</button><button class="filter-chip" data-filter="Gaming">Gaming</button><button class="filter-chip" data-filter="Learning">Learning</button><button class="filter-chip" data-filter="Entertainment">Entertainment</button><button class="filter-chip" data-filter="Other">Other</button></div>
-      <div class="video-grid" id="videoGrid"><div class="empty-state" id="emptyVideos"><div>▶</div><h3>Your video shelf is ready</h3><p>Add a YouTube video above to create your own collection.</p></div></div>
-      <p class="source-note">Video playback uses YouTube's official embedded player in privacy-enhanced mode. Some videos have embedding disabled by their owners and will not play here. This is a custom GoldenInternet interface, not a copy of YouTube's service.</p>
-    </section>
-  </main>
+</div></div>
 
-  <footer><div class="footer-brand"><span class="brand-orb small-orb">G</span><strong>GoldenInternet</strong></div><p>A brighter side of the internet.</p><small>Respect creators, copyright, and your school's acceptable-use rules.</small></footer>
+<script>
+// bubbles bg
+for(let i=0;i<14;i++){const b=document.createElement("div");b.className="bub";const s=20+Math.random()*80;b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${100+Math.random()*30}vh;animation-duration:${14+Math.random()*20}s;animation-delay:-${Math.random()*20}s`;document.body.appendChild(b)}
 
-  <div class="player-overlay" id="playerOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="playerTitle">
-    <div class="player-window glass-panel">
-      <div class="player-top"><div><span class="live-dot"></span><strong id="playerTitle">Now playing</strong></div><button id="closePlayer" class="close-button" aria-label="Close player">✕</button></div>
-      <div class="player-frame-wrap"><iframe id="gameFrame" title="Embedded game" allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
-      <p class="player-help">If the game area stays blank or displays a refusal message, its host may block embedding. That restriction cannot be bypassed from this page.</p>
-    </div>
-  </div>
+// tabs
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$$("nav .btn").forEach(b=>b.onclick=()=>{$$("nav .btn").forEach(x=>x.classList.remove("on"));b.classList.add("on");$$("section").forEach(s=>s.classList.remove("show"));$("#"+b.dataset.t).classList.add("show");stopGame();});
 
-  <script src="script.js"></script>
-</body>
-</html>
+// ---------- GAMES ----------
+let loop=null,keyH=null;
+function stopGame(){clearInterval(loop);loop=null;if(keyH){removeEventListener("keydown",keyH);keyH=null}}
+const stage=$("#gstage");
+$$("[data-g]").forEach(b=>b.onclick=()=>{stopGame();({snake,memory,ttt})[b.dataset.g]()});
+
+function snake(){
+stage.innerHTML='<div class="score">Score: <span id="sc">0</span></div><canvas id="c" width="400" height="400"></canvas><div class="hint">Arrow keys or WASD · Space to restart</div>';
+const c=$("#c"),x=c.getContext("2d"),N=20,S=20;
+let sn,d,nd,f,sc,over;
+function reset(){sn=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];d=nd={x:1,y:0};sc=0;over=false;place();$("#sc").textContent=0}
+function place(){do{f={x:Math.random()*N|0,y:Math.random()*N|0}}while(sn.some(p=>p.x==f.x&&p.y==f.y))}
+function draw(){
+const g=x.createLinearGradient(0,0,0,400);g.addColorStop(0,"#0a6aa8");g.addColorStop(1,"#073b5e");x.fillStyle=g;x.fillRect(0,0,400,400);
+x.fillStyle="#ffb84d";x.beginPath();x.arc(f.x*S+10,f.y*S+10,8,0,7);x.fill();
+sn.forEach((p,i)=>{x.fillStyle=i?"#7dff8a":"#d9ffd0";x.beginPath();x.roundRect(p.x*S+1,p.y*S+1,S-2,S-2,7);x.fill()});
+if(over){x.fillStyle="rgba(255,255,255,.85)";x.font="bold 30px sans-serif";x.textAlign="center";x.fillText("Game over!",200,200)}}
+function tick(){if(over)return;d=nd;const h={x:(sn[0].x+d.x+N)%N,y:(sn[0].y+d.y+N)%N};
+if(sn.some(p=>p.x==h.x&&p.y==h.y)){over=true;draw();return}
+sn.unshift(h);if(h.x==f.x&&h.y==f.y){sc++;$("#sc").textContent=sc;place()}else sn.pop();draw()}
+keyH=e=>{const k=e.key.toLowerCase();const m={arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1],arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0]}[k];
+if(m){e.preventDefault();if(m[0]!=-d.x||m[1]!=-d.y)nd={x:m[0],y:m[1]}}if(k==" "){e.preventDefault();reset()}};
+addEventListener("keydown",keyH);reset();draw();loop=setInterval(tick,110)}
+
+function memory(){
+const em=["🐬","🌴","🍉","🌊","🦋","⭐","🍀","🐠"];let deck=[...em,...em].sort(()=>Math.random()-.5),pick=[],moves=0,found=0;
+stage.innerHTML='<div class="score">Moves: <span id="mv">0</span></div><div class="grid" id="mg" style="grid-template-columns:repeat(4,1fr);max-width:380px"></div>';
+const g=$("#mg");deck.forEach((e,i)=>{const d=document.createElement("div");d.className="card";d.onclick=()=>{
+if(pick.length>1||d.classList.contains("flip")||d.classList.contains("done"))return;
+d.classList.add("flip");d.textContent=e;pick.push([d,e]);
+if(pick.length==2){moves++;$("#mv").textContent=moves;const[[a,ea],[b,eb]]=pick;
+if(ea==eb){a.classList.add("done");b.classList.add("done");pick=[];if(++found==8)$("#mv").textContent=moves+" — You win! 🎉"}
+else setTimeout(()=>{[a,b].forEach(z=>{z.classList.remove("flip");z.textContent=""});pick=[]},800)}};g.appendChild(d)})}
+
+function ttt(){
+let b=Array(9).fill(""),done=false;
+stage.innerHTML='<div class="score" id="tm">You are ✖ — your move</div><div class="grid" id="tg" style="grid-template-columns:repeat(3,1fr);max-width:300px"></div><div class="row" style="margin-top:14px"><button class="btn" id="tr">Restart</button></div>';
+const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const win=p=>L.some(l=>l.every(i=>b[i]==p));
+const cells=[...Array(9)].map((_,i)=>{const d=document.createElement("div");d.className="cell";d.onclick=()=>play(i);$("#tg").appendChild(d);return d});
+function show(){cells.forEach((c,i)=>c.textContent=b[i]==="X"?"✖":b[i]==="O"?"⭕":"")}
+function find(p){for(const l of L){const v=l.map(i=>b[i]);if(v.filter(z=>z==p).length==2&&v.includes(""))return l[v.indexOf("")]}return -1}
+function end(){if(win("X")){$("#tm").textContent="You win! 🎉";return done=true}if(win("O")){$("#tm").textContent="Computer wins!";return done=true}if(!b.includes("")){$("#tm").textContent="Draw!";return done=true}}
+function play(i){if(done||b[i])return;b[i]="X";show();if(end())return;
+let m=find("O");if(m<0)m=find("X");if(m<0)m=b[4]?[0,2,6,8,1,3,5,7].find(z=>!b[z]):4;b[m]="O";show();end()}
+$("#tr").onclick=ttt}
+snake();
+
+// ---------- MUSIC ----------
+let ac,master,an,timer,cur=null,noiseBuf;
+const mf=m=>440*2**((m-69)/12);
+function init(){if(ac)return;ac=new(window.AudioContext||window.webkitAudioContext)();master=ac.createGain();master.gain.value=$("#vol").value/100;an=ac.createAnalyser();an.fftSize=128;master.connect(an);an.connect(ac.destination);
+noiseBuf=ac.createBuffer(1,ac.sampleRate*.2,ac.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
+function tone(m,dur,type,vol,att=.02){const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;o.type=type;o.frequency.value=mf(m);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+att);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.05)}
+function kick(){const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;o.frequency.setValueAtTime(130,t);o.frequency.exponentialRampToValueAtTime(40,t+.15);g.gain.setValueAtTime(.7,t);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.connect(g);g.connect(master);o.start(t);o.stop(t+.3)}
+function hat(v){const s=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain(),t=ac.currentTime;s.buffer=noiseBuf;f.type="highpass";f.frequency.value=7000;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+.06);s.connect(f);f.connect(g);g.connect(master);s.start(t)}
+const CH=[[60,64,67,71],[57,60,64,67],[53,57,60,64],[55,59,62,65]],PE=[0,2,4,7,9];
+const TR={
+"🌤 Sky Chords":{ms:500,f:i=>{const c=CH[(i>>3)%4];if(i%8==0)c.forEach(n=>tone(n,3.8,"triangle",.07,.4));if(i%2&&Math.random()<.6)tone(72+PE[Math.random()*5|0]+12*(Math.random()<.3),1.4,"sine",.06)}},
+"☕ Lo-fi Beat":{ms:190,f:i=>{const c=CH[(i>>4)%4];if(i%16==0)c.forEach(n=>tone(n,2.8,"triangle",.06,.05));if(i%8==0||i%8==5)kick();if(i%2)hat(.15);if(i%4==0)tone(c[0]-24,.5,"sine",.25);if(i%4==2&&Math.random()<.5)tone(c[3]+12,.4,"sine",.05)}},
+"🌊 Arp Waves":{ms:140,f:i=>{const c=CH[(i>>4)%4],p=[0,1,2,3,2,1][i%6];tone(c[p]+12,.5,"sine",.1,.01);if(i%16==0)tone(c[0]-12,2,"triangle",.12,.1);if(i%4==0)hat(.06)}}};
+const tb=$("#tracks");
+Object.keys(TR).forEach(k=>{const b=document.createElement("button");b.className="btn";b.textContent=k;b.onclick=()=>{init();ac.resume();$("#aud").pause();stopM();cur=b;b.classList.add("on");let i=0;const t=TR[k];t.f(i++);timer=setInterval(()=>t.f(i++),t.ms)};tb.appendChild(b)});
+function stopM(){clearInterval(timer);timer=null;if(cur)cur.classList.remove("on");cur=null}
+$("#stopM").onclick=()=>{stopM();$("#aud").pause()};
+$("#vol").oninput=e=>{if(master)master.gain.value=e.target.value/100;$("#aud").volume=e.target.value/100};
+$("#aud").onplay=()=>stopM();
+let tracksList=[];
+$("#af").onchange=e=>{tracksList=[...e.target.files];const pl=$("#plist");pl.innerHTML="";tracksList.forEach(f=>{const b=document.createElement("button");b.className="btn";b.style.margin="4px";b.textContent="▶ "+f.name.replace(/\.[^.]+$/,"");b.onclick=()=>{const a=$("#aud");a.src=URL.createObjectURL(f);a.play()};pl.appendChild(b)})};
+// visualizer
+const vz=$("#viz"),vx=vz.getContext("2d");
+(function draw(){requestAnimationFrame(draw);const w=vz.width,h=vz.height;const g=vx.createLinearGradient(0,0,0,h);g.addColorStop(0,"#1aa5ea");g.addColorStop(1,"#073b5e");vx.fillStyle=g;vx.fillRect(0,0,w,h);
+if(!an)return;const d=new Uint8Array(an.frequencyBinCount);an.getByteFrequencyData(d);const bw=w/d.length;
+d.forEach((v,i)=>{const bh=v/255*h*.95;const gg=vx.createLinearGradient(0,h-bh,0,h);gg.addColorStop(0,"#eaffd9");gg.addColorStop(1,"#4fd05a");vx.fillStyle=gg;vx.beginPath();vx.roundRect(i*bw+2,h-bh,bw-4,bh,5);vx.fill()})})();
+
+// ---------- VIDEO ----------
+$("#vf").onchange=e=>{const fs=[...e.target.files],l=$("#vlist");l.innerHTML="";fs.forEach((f,i)=>{const b=document.createElement("button");b.className="btn";b.style.margin="4px";b.textContent="▶ "+f.name.replace(/\.[^.]+$/,"");b.onclick=()=>{$("#bubbles").style.display="none";bubOn=false;const v=$("#vid");v.style.display="block";v.src=URL.createObjectURL(f);v.play()};l.appendChild(b);if(!i)b.click()})};
+let bubOn=false;
+$("#bubbleBtn").onclick=()=>{const c=$("#bubbles");bubOn=!bubOn;c.style.display=bubOn?"block":"none";$("#vid").pause();if(bubOn)anim()};
+function anim(){const c=$("#bubbles"),x=c.getContext("2d"),B=[...Array(30)].map(()=>({x:Math.random()*760,y:Math.random()*380,r:8+Math.random()*34,s:.3+Math.random()*1.2,p:Math.random()*6}));let t=0;
+(function f(){if(!bubOn)return;t+=.02;const g=x.createLinearGradient(0,0,0,380);g.addColorStop(0,"#4cc3ff");g.addColorStop(.7,"#b8f1ff");g.addColorStop(1,"#6fd65a");x.fillStyle=g;x.fillRect(0,0,760,380);
+B.forEach(b=>{b.y-=b.s;if(b.y<-50){b.y=430;b.x=Math.random()*760}const X=b.x+Math.sin(t+b.p)*20;const r=x.createRadialGradient(X-b.r/3,b.y-b.r/3,2,X,b.y,b.r);r.addColorStop(0,"rgba(255,255,255,.95)");r.addColorStop(.5,"rgba(255,255,255,.15)");r.addColorStop(1,"rgba(90,190,255,.35)");x.fillStyle=r;x.beginPath();x.arc(X,b.y,b.r,0,7);x.fill();x.strokeStyle="rgba(255,255,255,.8)";x.stroke()});requestAnimationFrame(f)})()}
+</script>
+</body></html>
