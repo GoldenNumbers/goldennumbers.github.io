@@ -1,122 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#8bdcf1">
-  <meta name="description" content="GoldenInternet — a brighter place to explore the web.">
-  <title>GoldenInternet — A brighter side of the web</title>
+  <meta name="theme-color" content="#8de8f2">
+  <meta name="description" content="GoldenInternet — a bright place to discover browser games and videos.">
+  <title>GoldenInternet — Play & Watch</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="sky-glow sky-glow-one" aria-hidden="true"></div>
-  <div class="sky-glow sky-glow-two" aria-hidden="true"></div>
-  <div class="bubble-field" aria-hidden="true">
-    <span class="bubble b1"></span><span class="bubble b2"></span>
-    <span class="bubble b3"></span><span class="bubble b4"></span>
-    <span class="bubble b5"></span><span class="bubble b6"></span>
-  </div>
-
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="GoldenInternet home">
-      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
-      <span>Golden<span>Internet</span></span>
-    </a>
-    <nav class="main-nav" aria-label="Main navigation">
-      <a class="active" href="#home">Home</a>
-      <a href="#discover">Discover</a>
-      <a href="#about">About</a>
+  <div class="sky-glow"></div><div class="bubble bubble-a"></div><div class="bubble bubble-b"></div><div class="bubble bubble-c"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="GoldenInternet home"><span class="brand-orb">G</span><span>Golden<span class="brand-light">Internet</span><small>A brighter side of the internet</small></span></a>
+    <nav aria-label="Main navigation">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#games" class="nav-link">Games</a>
+      <a href="#videos" class="nav-link">YouTube videos</a>
     </nav>
-    <button class="theme-toggle glass-button" id="themeToggle" type="button" aria-label="Toggle color theme">
-      <span class="sun-icon" aria-hidden="true">☼</span><span id="themeLabel">Daylight</span>
-    </button>
+    <button id="themeToggle" class="glass-button theme-button" type="button" aria-label="Toggle light and night theme">☾</button>
   </header>
 
-  <main id="home">
-    <section class="hero page-width">
-      <div class="hero-copy">
-        <div class="status-pill"><span class="status-dot"></span> YOUR LITTLE CORNER OF THE INTERNET</div>
-        <h1>A brighter side<br>of the <span>internet.</span></h1>
-        <p class="hero-lede">Welcome to GoldenInternet — a fresh, friendly space made for curiosity, creativity, and discovering something new.</p>
-        <div class="hero-actions">
-          <a class="primary-button" href="#discover">Explore the site <span aria-hidden="true">↗</span></a>
-          <a class="text-link" href="#about">Get to know us <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="tiny-note"><span class="sparkle">✦</span> A little sunshine in your browser.</div>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy glass-panel">
+        <p class="eyebrow">WELCOME TO A BRIGHTER WEB</p>
+        <h1>Explore. <span>Play.</span> Watch.</h1>
+        <p class="hero-text">Your colorful corner of the internet for browser games and videos — all in one place.</p>
+        <div class="hero-actions"><a class="primary-button" href="#games">Explore games <span>→</span></a><a class="secondary-button" href="#videos">Watch videos</a></div>
+        <div class="hero-note"><span class="status-dot"></span> Made for the modern web</div>
       </div>
-
-      <div class="hero-art" aria-label="Decorative illustration of a glossy blue globe floating above water">
-        <div class="sun-disc"></div>
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="globe">
-          <div class="globe-shine"></div>
-          <div class="continent continent-one"></div>
-          <div class="continent continent-two"></div>
-          <div class="globe-sheen"></div>
-        </div>
-        <div class="water-ripple ripple-one"></div><div class="water-ripple ripple-two"></div>
-        <div class="art-caption"><span class="caption-icon">✧</span><span><b>Stay curious</b><small>There's always more to explore</small></span></div>
-        <span class="art-star star-one">✦</span><span class="art-star star-two">✧</span>
-      </div>
+      <div class="earth-scene" aria-hidden="true"><div class="sun"></div><div class="orbit orbit-one"></div><div class="earth"><div class="continent continent-one"></div><div class="continent continent-two"></div><div class="continent continent-three"></div><div class="earth-shine"></div></div><div class="leaf leaf-one"></div><div class="leaf leaf-two"></div></div>
     </section>
 
-    <section class="ticker" aria-label="Site motto">
-      <div class="ticker-track"><span>GOOD VIBRATIONS</span><i>✦</i><span>OPEN YOUR WORLD</span><i>✦</i><span>STAY CURIOUS</span><i>✦</i><span>GOOD VIBRATIONS</span><i>✦</i><span>OPEN YOUR WORLD</span><i>✦</i></div>
+    <section class="quick-search glass-panel">
+      <div><p class="eyebrow">FIND YOUR NEXT FAVORITE</p><h2>What are you in the mood for?</h2></div>
+      <label class="search-box"><span aria-hidden="true">⌕</span><input id="globalSearch" type="search" placeholder="Search games or your saved videos..." autocomplete="off"><kbd>/</kbd></label>
     </section>
 
-    <section class="discover-section page-width" id="discover">
-      <div class="section-heading">
-        <div><p class="eyebrow">THE STARTING POINT</p><h2>Find your next <span>favorite.</span></h2></div>
-        <p class="section-intro">A few places to begin. Pick a tile and let your curiosity lead the way.</p>
+    <section class="content-section" id="games">
+      <div class="section-heading"><div><p class="eyebrow">THE PLAYGROUND</p><h2>Games <span class="heading-spark">✦</span></h2><p>Pick a game and play it right here in GoldenInternet.</p></div><span class="count-pill" id="gameCount">6 games</span></div>
+      <div class="filter-row" id="gameFilters" aria-label="Filter games">
+        <button class="filter-chip selected" data-filter="all">All games</button>
+        <button class="filter-chip" data-filter="Racing">Racing</button>
+        <button class="filter-chip" data-filter="Arcade">Arcade</button>
+        <button class="filter-chip" data-filter="Simulation">Simulation</button>
+        <button class="filter-chip" data-filter="Sports">Sports</button><button class="filter-chip" data-filter="Classroom">Classroom library</button>
       </div>
-      <div class="search-wrap glass-panel">
-        <span aria-hidden="true">⌕</span>
-        <input id="cardSearch" type="search" placeholder="Search these cards..." aria-label="Search discovery cards">
-        <kbd>SEARCH</kbd>
+      <div class="game-grid" id="gameGrid">
+        <article class="game-card" data-title="Drive Mad" data-category="Racing" data-src="https://ubghyper.github.io/games/Drive-Mad.html"><div class="game-art art-drive"><span>🚙</span><i>RACING</i></div><div class="game-info"><div><h3>Drive Mad</h3><p>Balance your ride across wild tracks.</p></div><button class="play-button" aria-label="Play Drive Mad">▶</button></div></article>
+        <article class="game-card" data-title="Slope" data-category="Arcade" data-src="https://ubghyper.github.io/games/Slope.html"><div class="game-art art-slope"><span>🔴</span><i>ARCADE</i></div><div class="game-info"><div><h3>Slope</h3><p>Steer a ball through a neon course.</p></div><button class="play-button" aria-label="Play Slope">▶</button></div></article>
+        <article class="game-card" data-title="Cuphead" data-category="Arcade" data-src="https://ubghyper.github.io/games/Cuphead.html"><div class="game-art art-cup"><span>🎮</span><i>ARCADE</i></div><div class="game-info"><div><h3>Cuphead</h3><p>A challenging cartoon-style adventure.</p></div><button class="play-button" aria-label="Play Cuphead">▶</button></div></article>
+        <article class="game-card" data-title="BitLife" data-category="Simulation" data-src="https://ubghyper.github.io/games/Bitlife.html"><div class="game-art art-life"><span>🌴</span><i>SIMULATION</i></div><div class="game-info"><div><h3>BitLife</h3><p>Make choices in a text-based life sim.</p></div><button class="play-button" aria-label="Play BitLife">▶</button></div></article>
+        <article class="game-card" data-title="Basket Random" data-category="Sports" data-src="https://ubghyper.github.io/games/Basket-Random.html"><div class="game-art art-basket"><span>🏀</span><i>SPORTS</i></div><div class="game-info"><div><h3>Basket Random</h3><p>Chaotic basketball for one or two players.</p></div><button class="play-button" aria-label="Play Basket Random">▶</button></div></article>
+        <article class="game-card" data-title="Classroom Resources Library" data-category="Classroom" data-src="https://sites.google.com/view/drive-u-7-home/home"><div class="game-art art-drive"><span>🌐</span><i>GAME LIBRARY</i></div><div class="game-info"><div><h3>Classroom Resources</h3><p>Open the Google Sites game collection inside this player.</p></div><button class="play-button" aria-label="Open Classroom Resources library">▶</button></div></article>
       </div>
-      <div class="feature-grid" id="featureGrid">
-        <article class="feature-card card-blue" data-search="discover explore web internet">
-          <div class="card-top"><span class="card-icon">◎</span><span class="card-number">01 / EXPLORE</span></div>
-          <div class="mini-planet planet-blue"></div>
-          <h3>Explore</h3><p>Follow a new idea, find a new perspective, and see where the web takes you.</p>
-          <a href="#about" class="card-link">Take a look <span>↗</span></a>
-        </article>
-        <article class="feature-card card-green" data-search="create creativity ideas inspiration">
-          <div class="card-top"><span class="card-icon">✳</span><span class="card-number">02 / CREATE</span></div>
-          <div class="mini-planet planet-green"><span></span></div>
-          <h3>Create</h3><p>Make room for imagination. Your next great idea could start right here.</p>
-          <a href="#about" class="card-link">Get inspired <span>↗</span></a>
-        </article>
-        <article class="feature-card card-pink" data-search="connect community people share">
-          <div class="card-top"><span class="card-icon">⌘</span><span class="card-number">03 / CONNECT</span></div>
-          <div class="mini-orbs"><i></i><i></i><i></i></div>
-          <h3>Connect</h3><p>Good things happen when ideas travel and people share what they love.</p>
-          <a href="#about" class="card-link">Say hello <span>↗</span></a>
-        </article>
-      </div>
-      <p class="no-results" id="noResults" hidden>No matching cards yet. Try another search.</p>
+      <div class="source-note">Individual UBGHyper game pages and the Google Sites Classroom Resources catalog are loaded inside the in-page player, not as top-level redirects. The Google Sites card embeds its catalog page as a whole because its public page does not expose verified individual game URLs. Games remain the property of their creators. Some hosts may prohibit iframe embedding; GoldenInternet cannot override that restriction. <a href="https://ubghyper.github.io/" target="_blank" rel="noopener noreferrer">UBGHyper catalog</a>.</div>
     </section>
 
-    <section class="about-band page-width" id="about">
-      <div class="about-visual">
-        <div class="leaf leaf-one"></div><div class="leaf leaf-two"></div>
-        <div class="about-orb"><span>GI</span></div>
-        <span class="about-spark">✦</span>
+    <section class="content-section video-section" id="videos">
+      <div class="section-heading"><div><p class="eyebrow">YOUR VIDEO CORNER</p><h2>YouTube <span class="heading-spark">✦</span></h2><p>A custom video shelf with playback inside this page.</p></div><span class="count-pill" id="videoCount">0 videos</span></div>
+      <div class="video-add glass-panel">
+        <div><h3>Add a video to your shelf</h3><p>Paste a YouTube video link or video ID. It will play here, without navigating away.</p></div>
+        <form id="videoForm"><input id="videoInput" type="text" placeholder="Paste a YouTube URL or video ID" aria-label="YouTube URL or video ID" required><select id="videoCategory" aria-label="Video category"><option>Music</option><option>Gaming</option><option>Learning</option><option>Entertainment</option><option>Other</option></select><button class="primary-button" type="submit">Add video +</button></form>
       </div>
-      <div class="about-copy">
-        <p class="eyebrow">A FRESH LITTLE IDEA</p>
-        <h2>Made for the <span>wonder</span> of it.</h2>
-        <p>GoldenInternet is a growing web project with a simple goal: make browsing feel a little more colorful, welcoming, and fun. This is the beginning — there's plenty of room to grow.</p>
-        <a href="#home" class="secondary-button">Back to the top ↑</a>
-      </div>
+      <div class="filter-row" id="videoFilters"><button class="filter-chip selected" data-filter="all">All videos</button><button class="filter-chip" data-filter="Music">Music</button><button class="filter-chip" data-filter="Gaming">Gaming</button><button class="filter-chip" data-filter="Learning">Learning</button><button class="filter-chip" data-filter="Entertainment">Entertainment</button><button class="filter-chip" data-filter="Other">Other</button></div>
+      <div class="video-grid" id="videoGrid"><div class="empty-state" id="emptyVideos"><div>▶</div><h3>Your video shelf is ready</h3><p>Add a YouTube video above to create your own collection.</p></div></div>
+      <p class="source-note">Video playback uses YouTube's official embedded player in privacy-enhanced mode. Some videos have embedding disabled by their owners and will not play here. This is a custom GoldenInternet interface, not a copy of YouTube's service.</p>
     </section>
   </main>
 
-  <footer class="site-footer page-width">
-    <a class="brand footer-brand" href="#home"><span class="brand-mark"><span></span><span></span><span></span></span><span>Golden<span>Internet</span></span></a>
-    <p>Made with a little sunshine <span>✦</span></p>
-    <a href="#home" class="back-top">Back to top ↑</a>
-  </footer>
+  <footer><div class="footer-brand"><span class="brand-orb small-orb">G</span><strong>GoldenInternet</strong></div><p>A brighter side of the internet.</p><small>Respect creators, copyright, and your school's acceptable-use rules.</small></footer>
+
+  <div class="player-overlay" id="playerOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="playerTitle">
+    <div class="player-window glass-panel">
+      <div class="player-top"><div><span class="live-dot"></span><strong id="playerTitle">Now playing</strong></div><button id="closePlayer" class="close-button" aria-label="Close player">✕</button></div>
+      <div class="player-frame-wrap"><iframe id="gameFrame" title="Embedded game" allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      <p class="player-help">If the game area stays blank or displays a refusal message, its host may block embedding. That restriction cannot be bypassed from this page.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
